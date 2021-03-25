@@ -14,4 +14,7 @@ import matplotlib.pyplot as plt
 
 br1872 = geobr.read_country(year = 1872)
 
-br1872.plot(color = "white", edgecolor = "grey", figsize = (18,10))
+br1872.plot(color = "yellow", edgecolor = "blue", figsize = (18,10))
+
+br2019 = geobr.read_country(year = 2019)
+br2019.plot(color = "yellow", edgecolor = "blue", figsize = (18,10))
