@@ -12,6 +12,7 @@ import geobr
 import os
 import geopandas as gpd
 import geoplot
+import cartopy.crs as ccrs
 import pandas as pd
 import numpy as np
 import mapclassify
@@ -70,7 +71,7 @@ brpop["area"] = brpop['geometry'].to_crs({'init': 'epsg:3395'})\
 
 brpop["denspop"] = brpop["pop"] / brpop["area"]
 
-## Plotagem
+## Plotagem 1
 
 mpl.style.use("seaborn")
 fig, ax = plt.subplots(1, 1)
@@ -78,9 +79,17 @@ fig, ax = plt.subplots(1, 1)
 sch = mapclassify.BoxPlot(brpop["denspop"], hinge = 1.5)
 
 
-geoplot.choropleth(brpop, hue = pop,
-                   cmap = "Dark2", scheme = scheme)
-
-
 brpop.plot(column = "denspop", cmap = "Reds", scheme = "Quantiles",
+           classification_kwds = {"k" : 8})
+
+## Plotagem 2
+
+crs = ccrs.Orthographic(central_latitude = -10, central_longitude = 0)
+
+fig, ax = plt.subplots(subplot_kw={'projection': crs})
+
+crs_proj4 = crs.proj4_init
+brpop_ae = brpop.to_crs(crs_proj4)
+
+brpop_ae.plot(column = "denspop", cmap = "Reds", scheme = "Quantiles",
            classification_kwds = {"k" : 8})
