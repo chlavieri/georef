@@ -93,3 +93,8 @@ brpop_ae = brpop.to_crs(crs_proj4)
 
 brpop_ae.plot(column = "denspop", cmap = "Reds", scheme = "Quantiles",
            classification_kwds = {"k" : 8})
+
+
+## Pegando data frame de renda
+
+renda = pd.read_excel("Brasil-municipios/Data/renda_municipios.xlsx")
