@@ -98,3 +98,28 @@ brpop_ae.plot(column = "denspop", cmap = "Reds", scheme = "Quantiles",
 ## Pegando data frame de renda
 
 renda = pd.read_excel("Brasil-municipios/Data/renda_municipios.xlsx")
+
+renda["Municípios"] = [str(x) for x in list(renda["Municípios"])]
+renda["Municípios"] = [re.sub(" -.*", "", x) for x in list(renda["Municípios"])]
+renda["Municípios"] = [x.upper() for x in renda["Municípios"]]
+
+
+
+
+
+renda.columns = ["UF", "name_muni", "n_unid_local", "pessoal_ocup_t",
+                 "pessoal_ocup_assal", "pessoal_assal_med",
+                 "salario_total", "salario_medio_sal_min",
+                 "salario_med_mensal", "n_empresas"]
+
+renda = renda.iloc[1:,:]
+
+
+
+brpop_renda = pd.merge(brpop,renda, how = "inner")
+
+brpop_renda = brpop_renda.drop_duplicates()
+
+
+
+
