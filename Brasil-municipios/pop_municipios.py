@@ -107,7 +107,7 @@ renda["Municípios"] = [x.upper() for x in renda["Municípios"]]
 
 
 
-renda.columns = ["UF", "name_muni", "n_unid_local", "pessoal_ocup_t",
+renda.columns = ["name_state", "name_muni", "n_unid_local", "pessoal_ocup_t",
                  "pessoal_ocup_assal", "pessoal_assal_med",
                  "salario_total", "salario_medio_sal_min",
                  "salario_med_mensal", "n_empresas"]
@@ -115,6 +115,47 @@ renda.columns = ["UF", "name_muni", "n_unid_local", "pessoal_ocup_t",
 renda = renda.iloc[1:,:]
 
 
+dif3 = np.setdiff1d(brpop["name_muni"], renda["name_muni"])
+
+dif4 = np.setdiff1d(renda["name_muni"],brpop["name_muni"])
+
+renda.where(renda.name_muni == "AMPARO DE SÃO FRANCISCO").dropna()
+renda.iloc[1753, 2] = "AMPARO DO SÃO FRANCISCO"
+
+renda.where(renda.name_muni == "ARAÇAS").dropna()
+renda.iloc[1852, 2] = "ARAÇÁS"
+
+renda.where(renda.name_muni == "ATILIO VIVACQUA").dropna()
+renda.iloc[3107, 2] = "ATÍLIO VIVACQUA"
+
+renda.where(renda.name_muni == "BIRITIBA-MIRIM").dropna()
+renda.iloc[3342, 2] = "BIRITIBA MIRIM"
+
+renda.where(renda.name_muni == "DONA EUSÉBIA").dropna()
+renda.iloc[2500, 2] = "DONA EUZÉBIA"
+
+renda.where(renda.name_muni == "ELDORADO DOS CARAJÁS").dropna()
+renda.iloc[198, 2] = "ELDORADO DO CARAJÁS"
+
+renda.where(renda.name_muni == "ERERÊ").dropna()
+renda.iloc[946, 2] = "ERERÉ"
+
+renda.where(renda.name_muni == "FLORÍNIA").dropna()
+renda.iloc[3452, 2] = "FLORÍNEA"
+
+renda.where(renda.name_muni == "FORTALEZA DO TABOCÃO").dropna()
+renda.iloc[365, 2] = "TABOCÃO"
+
+renda.where(renda.name_muni == "IGUARACI").dropna()
+renda.iloc[1541, 2] = "IGUARACY"
+
+renda.where(renda.name_muni == "IGUARACI").dropna()
+renda.iloc[1541, 2] = "IGUARACY"
+
+
+
+
+######
 
 brpop_renda = pd.merge(brpop,renda, how = "inner")
 
